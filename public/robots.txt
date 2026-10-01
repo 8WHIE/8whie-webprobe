@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://8whie.github.io/8whie-webprobe/sitemap.xml

@@ -135,23 +135,95 @@ webprobe -i
 
 ---
 
+## 🛠️ Complete CLI Options Reference
+
+```text
+TARGET & WORDLIST:
+  -u, --url string         Target URL with placeholder (e.g. https://target.local/FUZZ)
+  -w, --wordlist string    Path to candidate wordlist dictionary
+  -p, --placeholder string Placeholder token (default "FUZZ")
+
+HTTP REQUEST CONTROLS:
+  -X, --method string      HTTP method (GET, HEAD, POST, PUT, DELETE, OPTIONS) (default "GET")
+  -H, --header string      Custom HTTP header (repeatable)
+  -d, --data string        Explicit HTTP request body data
+  -r, --redirects          Follow HTTP redirects (up to 10 hops)
+  -t, --timeout int        HTTP request timeout in seconds (default 10)
+  -x, --proxy string       Proxy server address (e.g. http://127.0.0.1:8080)
+  -k, --insecure           Allow untrusted TLS certificates (warning: insecure)
+
+CONCURRENCY & PACING:
+  -c, --concurrency int    Concurrent worker count (1 to 500) (default 20)
+  -rate int                Enforce rate limit in requests per second (0 = unrestricted)
+
+MATCHING & FILTERING:
+  -mc string               Match HTTP status codes (e.g. 200,204,301,302)
+  -fc string               Filter out HTTP status codes (default "404")
+  -ms string               Match response byte sizes (e.g. 512,1024)
+  -fs string               Filter out response byte sizes
+  -mw string               Match response word counts
+  -fw string               Filter out response word counts
+  -ml string               Match response line counts
+  -fl string               Filter out response line counts
+
+OUTPUT & REPORTING:
+  -o, --output string      Destination file for findings
+  -of, --format string     Output format: text, json, csv, md (default "text")
+  -q, --quiet              Quiet mode: output findings only
+  -v, --verbose            Verbose diagnostics: network warnings
+  --no-color               Disable ANSI terminal color output
+
+MODES:
+  -i, --interactive        Start interactive guided terminal interface
+  -V, --version            Display version and author information
+  -h, --help               Display full help manual
+```
+
+---
+
 ## 🧪 Testing & Validation
 
 The codebase includes comprehensive unit tests and an integration test utilizing an isolated Go mock HTTP test server (`httptest.NewServer`):
 
 ```bash
 # Run unit & integration tests
-go test -v -race ./8whie-webprobe/tests/...
+go test -v -race ./tests/...
 
 # Run Go static analysis
-go vet ./8whie-webprobe/...
+go vet ./...
+
+# Verify code formatting
+gofmt -l .
 ```
+
+---
+
+## 📚 Documentation Index
+
+Detailed documentation guides are available in the [`docs/`](docs/) directory:
+- [Usage Guide](docs/usage.md)
+- [Configuration Reference](docs/configuration.md)
+- [Filtering & Matching Strategies](docs/filtering.md)
+- [Output Formats & Reporting](docs/output.md)
+- [Troubleshooting & FAQ](docs/troubleshooting.md)
+- [Authorized Use & Security Policy](docs/security.md)
+- [Frequently Asked Questions (FAQ)](docs/faq.md)
+
+---
+
+## 🤝 Contribution Guidelines
+
+Contributions are welcome! Please follow these standards:
+1. Ensure all code adheres to standard `gofmt` style.
+2. Verify all tests pass cleanly (`go test -v ./tests/...`).
+3. Maintain zero external runtime dependencies where practical.
+4. Open a pull request describing your improvements clearly.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](8whie-webprobe/LICENSE) file for details.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
 Copyright (c) 2026 **8WHIE**
 
